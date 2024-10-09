@@ -1,0 +1,37 @@
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+import time as t
+def main():
+    s = Service(ChromeDriverManager().install())
+    d = webdriver.Chrome(service=s)
+    try:
+        d.get("https://www.amazon.in")
+        t.sleep(2)
+        sb=d.find_element(By.ID, "twotabsearchtextbox")
+        sb.send_keys("lg soundbar")
+        sb.send_keys(Keys.RETURN)
+        t.sleep(2)
+        p=d.find_elements(By.CSS_SELECTOR, ".s-main-slot .s-result-item")
+        product_info = {}
+        for product in p:
+            try:
+                name = product.find_element(By.CSS_SELECTOR, "h2 .a-text-normal").text
+                try:
+                    price_element = product.find_element(By.CSS_SELECTOR, ".a-price-whole")
+                    price = price_element.text
+                    price = float(price.replace(',', ''))
+                except:
+                    price = 0.0
+                product_info[name] = price
+            except Exception as e:
+                print(f"Error processing a product: {e}")
+        sorted_products = sorted(product_info.items(), key=lambda item: item[1])
+        for name, price in sorted_products:
+            print(f"{price:.2f} {name}")
+    finally:
+        d.quit()
+if __name__ == "__main__":
+    main()
