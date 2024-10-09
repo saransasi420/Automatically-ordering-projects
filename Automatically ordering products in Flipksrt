@@ -1,0 +1,32 @@
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+import time as t
+a=webdriver.Chrome()
+a.maximize_window()
+a.get("https://www.flipkart.com/")
+t.sleep(5)
+a.find_element(By.XPATH,'//*[@id="container"]/div/div[1]/div/div/div/div/div[1]/div/div/div/div[2]/div[1]/div/div[1]/div/div/div/div/div[1]/a[2]/div/div/div/div/img').click()
+t.sleep(5)
+a.find_element(By.XPATH,'//*[@id="container"]/div/div[1]/div[1]/div[2]/div[3]/div/div/div/a').click()
+t.sleep(5)
+a.find_element(By.XPATH,'/html/body/div[2]/div/div/div/div/div[2]/div/form/div[1]/input').send_keys("6369458112"+Keys.ENTER)
+t.sleep(15)
+a.find_element(By.NAME,'q').send_keys('noise earbuds'+Keys.ENTER)
+t.sleep(5)
+a.find_element(By.LINK_TEXT,'Noise Buds VS102 Neo with 40 Hrs Playtime, Environmenta...').click()
+t.sleep(15)
+b=a.window_handles[1]
+a.switch_to.window(b)
+a.execute_script("window.scrollBy(5303,1349)")
+t.sleep(5)
+a.find_element(By.XPATH,'//*[@id="pincodeInputId"]').send_keys('637304')
+t.sleep(10)
+a.find_element(By.XPATH,'//*[@id="container"]/div/div[3]/div[1]/div[2]/div[5]/div/div/div[1]/div[2]/div/div[2]/div/span').click()
+t.sleep(5)
+a.find_element(By.XPATH,'/html/body/div[1]/div/div[3]/div[1]/div[1]/div[2]/div/ul/li[2]/form/button').click()
+t.sleep(15)
+a.find_element(By.XPATH,'/html/body/div[1]/div/div[3]/div[1]/div[1]/div[2]/div/ul/li[2]/form/button').click()
+t.sleep(5)
+a.find_element(By.LINK_TEXT,'/html/body/div[1]/div/div[2]/div/div[1]/div[2]/div/div/div/div[1]/label[1]/div[2]/div/div[1]/button').click()
+t.sleep(5)
